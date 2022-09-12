@@ -1,0 +1,84 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int arr[100001];
+
+int main(void)
+{
+	int n = 0;
+	int k = 0;
+	int sum = 0;
+	int start = 0;
+	int max = -1000000;
+
+	scanf("%d %d", &n, &k);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &arr[i]);
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		sum = sum + arr[i];
+
+		if (i >= k - 1)
+		{
+			max = max < sum ? sum : max;
+			sum = sum - arr[start];
+			start++;
+		}
+	}
+
+	printf("%d", max);
+
+	return 0;
+}
+
+// 배열에서 시작점과 끝점을 조절
+// i 를 배열의 end로 보고 start와 함께 조절
+// k까지 값을 합했으면 최대값인지 검사하고 start를 빼고 다음 배열로 이동
+// max값은 충분히 작은 값으로 설정
+// 아래는 실패 코드
+
+// 시간초과로 실패
+#if 0
+#include <stdio.h>
+
+int arr[100001];
+
+int main(void)
+{
+	int n = 0;
+	int k = 0;
+	int temp = 0;
+	int max = 0;
+
+	scanf("%d %d", &n, &k);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &arr[i]);
+	}
+
+	for (int i = 0; i < n - k; i++)
+	{
+		temp = 0;
+
+		for (int j = i; j < i + k; j++)
+		{
+			temp = temp + arr[j];
+		}
+
+		if (max < temp)
+		{
+			max = temp;
+		}
+	}
+
+	printf("%d", max);
+
+	return 0;
+}
+#endif
