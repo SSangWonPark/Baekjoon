@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main(void)
+{
+	int arr[10] = { 0, };
+	int n = 0;
+	int max = 0;
+
+	scanf("%d", &n);
+
+	while (n > 0)
+	{
+		if (n%10 == 6 || n %10 == 9)
+		{
+			arr[6]++;
+			arr[9]++;
+		}
+		else
+		{
+			arr[n % 10]++;
+		}
+
+		n = n / 10;
+	}
+
+	arr[6] = (arr[6]-1) / 2 + 1;
+	arr[9] = (arr[9]-1) / 2 + 1;
+
+	for (int i = 0; i < 10; i++)
+	{
+		max = max > arr[i] ? max : arr[i];
+	}
+
+	printf("%d", max);
+
+	return 0;
+}
+
+// 0 ~ 9 까지의 배열을 만들어서 수를 증가시킴.
+// 6과 9 가 서로 혼용 가능한 점을 고려.
+// 두 경우에서 두 수 모두 올려버리고.
+// 1을 빼고 2로 나눈 후 다시 1을 더해줘서 구함.
