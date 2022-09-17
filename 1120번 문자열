@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char a[51];
+    char b[51];
+    int count = 0;
+    int min = 50;
+
+    scanf("%s", a);
+    scanf("%s", b);
+
+    for (int i = 0; i <= strlen(b) - strlen(a); i++)
+    {
+        count = 0;
+
+        for (int j = i, k = 0; j < strlen(a) + i, k < strlen(a); j++, k++)
+        {
+            if (a[k] != b[j])
+            {
+                count++;
+            }
+        }
+
+        min = min < count ? min : count;
+    }
+
+    printf("%d", min);
+
+    return 0;
+}
+
+
+// a문자열 계속 돌리고, b는 한칸씩 밀면서 확인
+// 최소값을 min에 저장하면서 구함.
