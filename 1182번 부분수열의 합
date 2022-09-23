@@ -1,0 +1,91 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int n, s, sum, count;
+int arr[21];
+
+void dfs(int i, int sum) {
+
+	if (i == n) 
+	{
+		return;
+	}
+	if (sum + arr[i] == s)
+	{
+		count++;
+	}
+
+	dfs(i + 1, sum);
+	dfs(i + 1, sum + arr[i]);
+}
+
+int main() {
+
+	scanf("%d %d", &n, &s);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &arr[i]);
+	}
+
+	dfs(0, 0);
+
+	printf("%d\n", count);
+
+	return 0;
+}
+
+// 모든 변수를 전역변수로 만들어 두고, 재귀로 푸는 게 인상적.
+// DFS 알고리즘을 참고하여 만듬. 깊이 우선 탐색
+// 모든 노드를 방문하는 방법. dfs에 대해 좀더 공부할 것.
+
+// 아래 코드는 실패한 코드
+// 실패 사유 : 수열을 잘못 이해함.
+// 무조건 연속된 것이 수열이 아님.
+// 나올 수 있는 모든 경우의 수였음.
+
+# if 0
+int arr[100001];
+
+int main() {
+	
+	int n = 0;
+	int s = 0;
+	int sum = 0;
+	int count = 0;
+
+	scanf("%d %d", &n, &s);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &arr[i]);
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i; j < n; j++)
+		{
+			sum = sum + arr[j];
+
+			if (s == sum)
+			{
+				count++;
+				break;
+			}
+			else if (s < sum)
+			{
+				break;
+			}
+		}
+		sum = 0;
+	}
+
+	printf("%d", count);
+
+	return 0;
+}
+#endif
+
+// 연속된 수열이니 시작점을 밀면서 체크
+// 유효한 수열이 나오면 count에 값을 저장.
