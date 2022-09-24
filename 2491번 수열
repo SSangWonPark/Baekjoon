@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int num[100001];
+
+int main() {
+
+	int n = 0;
+	int max = 1;
+	int up = 1;
+	int down = 1;
+
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &num[i]);
+	}
+	
+	for (int i = 0; i < n - 1; i++)
+	{
+		if (num[i] <= num[i + 1])
+		{
+			up++;
+		}
+		else
+		{
+			up = 1;
+		}
+
+		if (num[i] >= num[i + 1])
+		{
+			down++;
+		}
+		else
+		{
+			down = 1;
+		}
+
+		max = max >= up ? max : up;
+		max = max >= down ? max : down;
+	}
+
+	printf("%d", max);
+
+	return 0;
+}
+
+// 연속된 수열이기 때문에 수열 한바퀴만 돌면 됨
+// 수열을 돌면서 앞이 커지면 up++, 작아지면 down++로
+// 각 경우가 성립하지 않을 시 1로 초기화. 
+// 연속된 경우는 편하게 풀 수 있는 것 같다.
+// 다만 현재 수와 다음 수를 비교한다면 for문이 n-1번 돌아야한다.
