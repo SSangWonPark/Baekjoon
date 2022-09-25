@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int box[1001];
+int dp[1001];
+
+int main() {
+
+	int n = 0;
+	int max = 0;
+
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &box[i]);
+	}
+
+	dp[0] = 1;
+	
+	for (int i = 1; i < n; i++)
+	{
+		dp[i] = 1;
+
+		for (int j = 0; j < i; j++)
+		{
+			if (box[i] > box[j])
+			{
+				dp[i] = dp[i] > dp[j] ? dp[i] : dp[j] + 1;
+			}
+		}
+		max = max > dp[i] ? max : dp[i];
+	}
+
+	printf("%d", max);
+
+	return 0;
+}
+
+// 수열을 돌면서 dp에 최대 상자수를 저장했다.
+// i를 증가시키면서 이전 수열 j보다 크면 j + 1의 값이 들어가도록 했다. 
+// 연속된 수열보다 생각할게 많지만 
+// dp에 그 순간 들어가는 최대 수를 기록하니 쉬웠다.
