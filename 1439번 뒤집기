@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+
+char s[1000001];
+
+int main()
+{
+	char cmp_0 = '0';
+	char cmp_1 = '1';
+	int count_0 = 0;
+	int count_1 = 0;
+	int ans = 0;
+
+	scanf("%s", s);
+
+	for (int i = 0; i < strlen(s); i++)
+	{
+		if (cmp_0 != s[i])
+		{
+			count_0++;
+		}
+		cmp_0 = s[i];
+
+		if (cmp_1 != s[i])
+		{
+			count_1++;
+		}
+		cmp_1 = s[i];
+	}
+
+	ans = count_0 > count_1 ? count_0 : count_1;
+
+	printf("%d", ans / 2);
+
+	return 0;
+}
+
+// 문자열을 받고 for문을 돌리며 이전과 다르면 count함.
+// 처음 비교 값이 '0' 인 것과 '1' 인 것으로 나눠서 진행 큰 것은 반환.
+// 마지막 답을 2로 나누는 것으로 해결.
+// 둘 중 사실 작은 값이 아닌 큰 값을 줘야 하는걸로 틀렸었다.
+// 잘 생각하고 풀자. 쉬운 문제인데 틀리면 억울하다.
