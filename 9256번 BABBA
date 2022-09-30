@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int A[46];
+int B[46];
+
+int main()
+{
+	int n = 0;
+
+	scanf("%d", &n);
+
+	A[1] = 0;
+	B[1] = 1;
+	A[2] = 1;
+	B[2] = 1;
+
+	for (int i = 3; i <= n; i++)
+	{
+		A[i] = B[i - 1];
+		B[i] = B[i - 1] + B[i - 2];
+	}
+
+	printf("%d %d", A[n], B[n]);
+
+	return 0;
+}
+
+// A B BA BAB BABBA
+// A 는 B로 B는 BA로
+// 
+// 1 0 01 010 01001 01001010 0100101001001
+// A의 개수 : 1 0 1 1 2 3 5
+// B의 개수 : 0 1 1 2 3 5 8
+// 
+// A[n] = B[n-1]
+// B[n] = B[n-1] + B[n-2]
