@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main() {
+
+    int n = 0;
+	
+	scanf("%d", &n);
+
+	if (n%2 == 0)
+	{
+		printf("CY");
+	}
+	else
+	{
+		printf("SK");
+	}
+
+    return 0;
+}
+
+// sk = 0, cy = 1
+// 0 1 0 1 0 1
+// 1 혹은 3을 가져간다면, 1 1 1 1 3 으로 결국 번갈아가며 승리함
+// 따라서 %2 에 따라 승부가 나뉨
