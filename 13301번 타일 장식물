@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+long long dp[81];
+
+int main() {
+
+    int n = 0;
+	
+	scanf("%d", &n);
+
+	dp[1] = 4;
+	dp[2] = 6;
+
+	for (int i = 3; i <= n; i++)
+	{
+		dp[i] = dp[i - 1] + dp[i - 2];
+	}
+	printf("%lld", dp[n]);
+
+    return 0;
+}
+
+// 피보나치 수 45가 넘으면 int형으로는 불가능해짐
+// long long형을 쓰고, 출력 시에는  %lld를 사용하자
+// 기본적인 피보나치 문제의 변형
+// 단순 둘레인 줄 알고 4를 곱했지만 테스트케이스를 보니 아니었다.
+// 4 6 10 16 26 ...
+// 그냥 수만 다른 피보나치였다.
