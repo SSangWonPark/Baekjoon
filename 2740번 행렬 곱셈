@@ -1,0 +1,60 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main() {
+
+    int a, b;
+    int c, d;
+    int A[101][101];
+    int B[101][101];
+    int C[101][101] = { 0, };
+
+    scanf("%d %d", &a, &b);
+
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < b; j++)
+        {
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    scanf("%d %d", &c, &d);
+
+    for (int i = 0; i < c; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            for (int k = 0; k < b; k++)
+            {
+                C[i][j] = C[i][j] + A[i][k] * B[k][j];
+            }
+
+        }
+    }
+
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    return 0;
+}
+
+// 행렬의 곱을 안다면 풀 수 있는 문제
+// 3중 for문을 사용하기 때문에 유의해야한다.
+// C[i][j] = C[i][j] + A[i][k] * B[k][j];
