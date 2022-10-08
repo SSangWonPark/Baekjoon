@@ -1,0 +1,60 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int n, k;
+int W[101];
+int V[101];
+int dp[101][100001];
+
+int NS(int i, int w) {
+
+	int n1 = 0;
+	int n2 = 0;
+
+	if (dp[i][w] > 0)
+	{
+		return dp[i][w];
+	}
+
+	if (i == n)
+	{
+		return 0;
+	}
+
+	if (w+W[i] <= k)
+	{
+		n1 = V[i] + NS(i + 1, w + W[i]);	// 포함하는 경우
+	}
+	
+	n2 = NS(i + 1, w);	// 미포함하는 경우
+
+	return dp[i][w] = n1 > n2 ? n1 : n2;	// 둘 중 큰 값을 dp에 저장
+}
+
+int main(void)
+{
+
+	scanf("%d %d", &n, &k);
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d %d", &W[i], &V[i]);
+	}
+
+	printf("%d", NS(0, 0));
+
+	return 0;
+}
+
+// DP 냅색 배낭문제
+// 각 경우를 빼거나 들어가는 경우를 찾아 배열에 저장.
+// 모든 경우의 수를 찾는 것.
+// n1과 n2에 각각 포함하는 경우와 포함하지 않는 경우
+// 그 중 큰 값을 저장해 해결
+// 위 방법은 유튜브 강의를 참고함.
+
+// 점화식은 i를 가방의 무게, j를 가치로 두었을 때,
+// DP[i][j] = DP[i - 1][j] > DP[i - 1][j - W[i]] + V[i] ? DP[i - 1][j] : DP[i - 1][j - W[i]] + V[i];
+// DP[i][j] = max(DP[i - 1][j], DP[i - 1][j - W[i]] + V[i]);
+// 로 정리가능. 바로 나오도록 공부를 더 하자.
