@@ -1,0 +1,27 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main() {
+
+    int n = 0;
+    
+    scanf("%d", &n);
+
+    if (n % 2 == 0)
+    {
+        printf("SK");
+    }
+    else
+    {
+        printf("CY");
+    }
+
+    return 0;
+}
+
+// 1 cy
+// 2 sk
+// 3 cy
+// 4 sk
+// 1 혹은 3을 둘 수 있기 때문에 n의 값이 짝수이면 sk, 홀수이면 cy
