@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int arr[501][501];
+int dp[501][501];
+
+int main()
+{
+	int n = 0;
+	int max = 0;
+
+	scanf("%d", &n);
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			scanf("%d", &arr[i][j]);
+		}
+	}
+
+	dp[0][0] = arr[0][0];
+
+	for (int i = 1; i < n; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			dp[i][j] = (arr[i][j] + dp[i - 1][j]) > (arr[i][j] + dp[i - 1][j - 1]) ?
+				(arr[i][j] + dp[i - 1][j]) : (arr[i][j] + dp[i - 1][j - 1]);
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		max = max > dp[n - 1][i] ? max : dp[n - 1][i];
+	}
+
+	printf("%d", max);
+
+	return 0;
+}
+
+/*
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+*/
+
+// 위처럼 입력이 들어옴.
+// 바로 위의 숫자 혹은 왼쪽 대각 위의 숫자랑 합해짐.
+// dp[i][j] = (arr[i][j] + dp[i-1][j]) > (arr[i][j] + dp[i-1][j-1]) ? (arr[i][j] + dp[i-1][j]) : (arr[i][j] + dp[i-1][j-1])
