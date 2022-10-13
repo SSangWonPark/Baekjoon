@@ -1,0 +1,45 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int dp[1245][1245];
+
+int main() {
+
+    int n = 0;
+    int m = 0;
+    int x1, y1, x2, y2;
+
+    scanf("%d %d", &n, &m);
+    
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            scanf("%d", &dp[i][j]);
+
+            dp[i][j] = dp[i][j] + dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1];
+        }
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+        scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+
+        int ans = dp[x2][y2] - dp[x1 - 1][y2] - dp[x2][y1 - 1] + dp[x1 - 1][y1 - 1];
+
+        printf("%d\n", ans);
+    }
+
+    return 0;
+}
+
+// 누적합은 누적합인데 사각형으로 생각하는 누적합.
+// dp[i][j] = dp[i][j] + dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1]
+// 계속 누적하는 것이 아니라 사각형을 만들면서
+// dp[i][j] + dp[i-1][j] + dp[i][j-1] 으로 위와 옆의 누적합에 자신을 누적하고 중복된 dp[i-1][j-1]를 한번 빼줌.
+// 출력 시에는 사각형의 누적합 dp 끼리 중복영역만 출력하도록 함.
+// dp[x2][y2] - dp[x1 - 1][y2] - dp[x2][y1 - 1] + dp[x1 - 1][y1 - 1]
+// 가장 큰 부분에서 두 작은 부분을 빼고 중복된 부분을 한번 더함.
+// 누적합을 자꾸 계속 더하는 걸로 생각해서 시간이 걸림.
+// 문제를 그리고 생각하자.
