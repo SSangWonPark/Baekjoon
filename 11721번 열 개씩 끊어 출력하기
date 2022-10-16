@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+    char string[101];
+
+    scanf("%s", string);
+
+    for (int i = 0; i < strlen(string); i++)
+    {
+        string[i];
+        printf("%c", string[i]);
+
+        if (i % 10 == 9)
+        {
+            printf("\n");
+        }
+    }
+
+    return 0;
+}
+
+// 글자하나씩 출력하면서 10번째마다 줄바꿈
