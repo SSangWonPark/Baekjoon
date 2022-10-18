@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#define MOD 1000000009
+
+long long dp[100001][4];
+
+int main() {
+
+    int t = 0;
+    int n = 0;
+
+    dp[1][1] = 1;
+    dp[2][2] = 1;
+    dp[3][1] = 1;
+    dp[3][2] = 1;
+    dp[3][3] = 1;
+
+    for (int i = 4; i <= 100000; i++)
+    {
+        dp[i][1] = (dp[i - 1][2] + dp[i - 1][3]) % MOD;
+
+        dp[i][2] = (dp[i - 2][1] + dp[i - 2][3]) % MOD;
+
+        dp[i][3] = (dp[i - 3][1] + dp[i - 3][2]) % MOD;
+    }
+
+    scanf("%d", &t);
+
+    for (int i = 0; i < t; i++)
+    {
+        scanf("%d", &n);
+
+        printf("%d\n", (dp[n][1] + dp[n][2] + dp[n][3]) % MOD);
+    }
+   
+    return 0;
+}
+
+// 1, 2, 3 앞에서는 같은 수가 올 수 없음.
+// 자기 자신이 오는 경우를 뺀 것들을 더해줌.
+// 1이면 2인 경우랑 3인 경우.
+// 
+// 초기값을 생각할 때, 3인 경우 각각 1 임.
