@@ -1,0 +1,46 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int dp[10001];
+int arr[101];
+
+int main() {
+
+    int n = 0;
+    int k = 0;
+
+    scanf("%d %d", &n, &k);
+
+    for (int i = 1; i <= n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    dp[0] = 1;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = arr[i]; j <= k; j++)
+        {
+            dp[j] = dp[j] + dp[j - arr[i]];
+        }
+    }
+
+    printf("%d", dp[k]);
+
+    return 0;
+}
+
+// k범위 : 1 2 3 4 5 6 7 8 9 10
+// 동전1 : 1 1 1 1 1 1 1 1 1 1    / 1만 사용
+// 동전2 : 1 2 2 3 3 4 4 5 5 6    / 1, 2 사용 / dp[i] = dp[i] + dp[i-2]
+// 동전5 : 1 2 2 3 4 5 6 7 8 10   / 1, 2, 5 사용 / dp[i] = dp[i] + dp[i-2] + dp[i-5]
+// 동전의 점화식 : dp[i] = dp[i] + dp[i-2] + dp[i-5]
+// dp[i - n] ==> dp[i - arr[j]]
+// dp[j] = dp[j] + dp[j - arr[i]]
+
+// 런타임 에러가 떴는데 
+// 이중 for문에서 j = arr[i]로 시작해야하는데 
+// j = i로 시작해서 런타임 에러가 뜸.
+// 동전의 수부터 돌리면 되니까 arr[i]가 맞음.
