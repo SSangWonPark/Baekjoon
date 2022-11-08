@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int dp[100001];
+
+int main(void)
+{
+	int n = 0;
+
+	scanf("%d", &n);
+
+	dp[1] = 3;
+	dp[2] = 7;
+
+	for (int i = 3; i <= n; i++)
+	{
+		dp[i] = (dp[i - 1] * 2 + dp[i - 2]) % 9901;
+	}
+
+	printf("%d", dp[n]);
+
+	return 0;
+}
+// 2 * n 사이즈에 대각으로만 존재가능. 
+// 1 : 3가지 사자 왼쪽, 오른쪽, 없는 거
+// 2 : 7가지 1의 가짓수에 사자 왼쪽 2개, 오른쪽 2개, 없는 거 3개
+// 3 : 17가지 2의 가짓수에 사자 왼쪽 2*2개, 오른쪽 2*2개, 없는 거3*3개
+// 4 : 41가지 
+
+
+// 1	:	o | o	/	x | o	/	o | x
+//			1 + 1 +1	3가지
+// 
+// 2	:	o | o,	o | o,	o | o	/	x | o,	x | o	/	o | x,	o | x
+//			o | o,	x | o,	o | x	/	o | o,	o | x	/	o | o,	x | o
+//			3 + 2 + 2	7가지
+//
+// 3	:	o | o,	o | o,	o | o,	o | o,	o | o,	o | o,	o | o	/	x | o,	x | o,	x | o,	x | o,	x | o	/	o | x,	o | x,	o | x,	o | x,	o | x
+//			o | o,	o | o,	o | o,	x | o,	x | o,	o | x,	o | x	/	o | o,	o | o,	o | o,	o | x,	o | x	/	o | o,	x | o,	o | x,	o | o,	x | o
+//			o | o,	o | x,	x | o,	o | o,	o | x,	o | o,	x | o	/	o | o,	x | o,	o | x,	o | o,	x | o	/	o | o,	o | o,	o | o,	o | x,	o | x
+//			7 + 5 + 5	17가지
+
+// dp[i] = dp[i-1] * 2 + dp[i - 2]
