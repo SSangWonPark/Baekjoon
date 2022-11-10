@@ -1,0 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <string.h>
+
+int dp[1001][1001];
+
+int main(void)
+{
+	char string1[1002];
+	char string2[1002];
+	
+	string1[0] = '0';
+	string2[0] = '0';
+
+	scanf("%s", string1 + 1);
+	scanf("%s", string2 + 1);
+
+	for (int i = 0; i < strlen(string1); i++)
+	{
+		for (int j = 0; j < strlen(string2); j++)
+		{
+			if (i == 0 || j == 0)
+			{
+				dp[i][j] = 0;
+				continue;
+			}
+
+			if (string1[i] == string2[j])
+			{
+				dp[i][j] = dp[i - 1][j - 1] + 1;
+			}
+			else
+			{
+				dp[i][j] = dp[i][j - 1] > dp[i - 1][j] ? dp[i][j - 1] : dp[i - 1][j];
+			}
+		}
+	}
+
+	printf("%d", dp[strlen(string1) - 1][strlen(string2) - 1]);
+
+	return 0;
+}
+
+// LCS 알고리즘
+//
+//   0 A C A Y K P
+// 0 0 0 0 0 0 0 0
+// C 0 0 1 1 1 1 1
+// A 0 1 1 2 2 2 2
+// P 0 1 1 2 2 2 3
+// C 0 1 2 2 2 2 3
+// A 0 1 2 3 3 3 3
+// K 0 1 2 3 3 4 4
+// 
+// 현 위치에서 왼쪽이나 위에서 큰 수를 가져오고 같으면 왼쪽 위 값 +1을 해준다.
+// 
+// 같을 때: dp[i][j] = dp[i-1][j-1] + 1;
+// 다를 때: dp[i][j] = dp[i][j-1] > dp[i-1][j] ? dp[i][j-1] : dp[i-1][j];
+//
+// LCS의 경우 문자열 가장 앞을 0으로 가져오면 훨씬 편하다.
+// 그 부분에서 여러 번 틀렸다.
+// 0을 추가로 붙였으면 문자열의 크기는 최대 사이즈 + 2 이다. ('0'과 널문자)
+//
