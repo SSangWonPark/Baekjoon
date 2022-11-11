@@ -1,0 +1,74 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+	char a[101], b[101];
+	char c = 0;
+
+	scanf("%s", a);
+	getchar();
+	scanf("%c", &c);
+	scanf("%s", b);
+
+	if (c == '+')
+	{
+		if (strlen(a) > strlen(b))
+		{
+			printf("1");
+
+			for (int i = 0; i < strlen(a) - strlen(b) - 1; i++)
+			{
+				printf("0");
+			}
+
+			printf("1");
+
+			for (int i = 0; i < strlen(b) - 1; i++)
+			{
+				printf("0");
+			}
+		}
+		else if (strlen(a) < strlen(b))
+		{
+			printf("1");
+
+			for (int i = 0; i < strlen(b) - strlen(a) - 1; i++)
+			{
+				printf("0");
+			}
+
+			printf("1");
+
+			for (int i = 0; i < strlen(a) - 1; i++)
+			{
+				printf("0");
+			}
+		}
+		else
+		{
+			printf("2");
+			
+			for (int i = 0; i < strlen(a) - 1; i++)
+			{
+				printf("0");
+			}
+		}
+	}
+	else
+	{
+		printf("1");
+		for (int i = 0; i < strlen(a) + strlen(b) - 2; i++)
+		{
+			printf("0");
+		}
+	}
+	
+	return 0;
+}
+
+// 처음에 안되서 당황함. 
+// 최대 100자리여서 문자열로 받아서 처리해야 함.
+// 다행히 10의 제곱꼴이라 길이만 알면 쉽게 해결 가능.
+//
