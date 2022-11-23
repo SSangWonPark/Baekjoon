@@ -1,0 +1,24 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+
+int main() {
+
+    long long n = 0;
+
+    scanf("%lld", &n);
+
+    if (n % 2 == 1)
+    {
+        printf("SK");
+    }
+    else
+    {
+        printf("CY");
+    }
+
+    return 0;
+}
+
+// 0 1 0 1 0 1 0 1 0
+// 2로 나눠서떨어지지 않으면 상근이 승
